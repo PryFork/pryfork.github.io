@@ -1,0 +1,29 @@
+​canvas.getContext('2d');
+
+          window.onresize = throttle(100, function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            context.clearRect(0,0, window.innerWidth, window.innerHeight);
+            canvasImage && context.putImageData(canvasImage, 0, 0);
+          });
+
+          window.onmousemove = throttle(10, function (event) {
+            cursorPosition = {
+              x: event.clientX,
+              y: event.clientY,
+            };
+            drawCircle(event);
+          });
+
+          window.ontouchmove = throttle(10, function (event) {
+            cursorPosition = {
+              x: event.touches[0].clientX,
+              y: event.touches[0].clientY,
+            };
+            drawCircle(event);
+          });
+        }
+      </script>
+
+
+    </canvas></body></html>
