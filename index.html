@@ -5,194 +5,20 @@
   <noscript>
     <meta http-equiv="refresh" content="1">
   </noscript>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    @keyframes bgcolor {
-      0% {
-        background-color: #45a3e5
-      }
-
-      30% {
-        background-color: #66bf39
-      }
-
-      60% {
-        background-color: #eb670f
-      }
-
-      90% {
-        background-color: #f35
-      }
-
-      100% {
-        background-color: #864cbf
-      }
-    }
-
-    body {
-      -webkit-animation: bgcolor 20s infinite;
-      animation: bgcolor 10s infinite;
-      -webkit-animation-direction: alternate;
-      animation-direction: alternate;
-    }
-    }
-
-    60% {
-      background-color: #eb670f
-    }
-
-    90% {
-      background-color: #f35
-    }
-
-    100% {
-      background-color: #864cbf
-    }
-    }
-
-    body {
-      -webkit-animation: bgcolor 20s infinite;
-      animation: bgcolor 10s infinite;
-      -webkit-animation-direction: alternate;
-      animation-direction: alternate;
-    }
-
-    main {
-      padding: 1rem;
-    }
-
-    p {
-      max-width: 500px
-    }
-
-    .note{
-      font-size: small;
-      color: #9B9B9B;
-    }
-
-    .content{
-      margin: 50px;
-      position: fixed;
-    }
-
-    #loader:after {
-      overflow: hidden;
-      display: inline-block;
-      vertical-align: bottom;
-      animation: ellipsis steps(4,end) 1000ms infinite;
-      content: "\2026";
-      width: 0px;
-    }
-
-    @keyframes ellipsis {
-      to {
-        width: 1.25em
-      }
-    }
-
-    canvas#background {
-      position: fixed;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-  </style>
+  <link rel="stylesheet" href="art.css">
+  <script src="myscripts.js"></script>
   </head>
 
   <body>
     <main>
       <div class="content">
         <p class="note">
-          <!-- add content if needed for a status and description -->
         </p>
       </div>
     </main>
     <canvas id="background" width="1045" height="794">
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bowser/1.9.4/bowser.min.js"></script>
-
-      <script>
-        // drawing
-
-        var canvas, context, canvasImage;
-
-        var cursorPosition = {
-          x: undefined,
-          y: undefined,
-        };
-        var color = '#7289DA';
-        var size = 30;
-
-        function randomColor() {
-          var colors = [
-            '#fcd1c4',
-            '#abfcec',
-            '#a3d9e1',
-            '#fbbfff',
-            '#a9ef8f',
-            '#fff0b2',
-            '#fff0b2',
-            '#7289DA'
-          ];
-          color = colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        function throttle(ms, fn) {
-          var lastCallTime;
-          return function () {
-            var now = Date.now();
-            if (!lastCallTime || now - lastCallTime > ms) {
-              lastCallTime = now;
-              fn.apply(this, arguments);
-            }
-          }
-        }
-
-        function drawCircle(event) {
-          context.beginPath();
-          context.arc(cursorPosition.x, cursorPosition.y, size, 0, 2 * Math.PI);
-          context.closePath();
-          context.fillStyle = color;
-          context.fill();
-          canvasImage = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
-        }
-
-        window.onload = function () {
-          randomColor();
-          canvas = document.getElementById('background');
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-          context = canvas.getContext('2d');
-
-          window.onresize = throttle(100, function () {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            context.clearRect(0,0, window.innerWidth, window.innerHeight);
-            canvasImage && context.putImageData(canvasImage, 0, 0);
-          });
-
-          window.onmousemove = throttle(10, function (event) {
-            cursorPosition = {
-              x: event.clientX,
-              y: event.clientY,
-            };
-            drawCircle(event);
-          });
-
-          window.ontouchmove = throttle(10, function (event) {
-            cursorPosition = {
-              x: event.touches[0].clientX,
-              y: event.touches[0].clientY,
-            };
-            drawCircle(event);
-          });
-        }
-      </script>
 
 
     </canvas></body></html>
